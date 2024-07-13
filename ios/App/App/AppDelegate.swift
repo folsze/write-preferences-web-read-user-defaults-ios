@@ -7,7 +7,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+
+        let defaults = UserDefaults.standard
+        if let savedValue = defaults.string(forKey: "CapacitorStorage.myKey") {
+            print("Saved value for 'yourKey': \(savedValue)")
+        } else {
+            print("No value found for 'yourKey'")
+        }
+
+        
+        if let savedValue = defaults.string(forKey: "my.group.example.myKey") {
+            print("1Saved value for 'yourKey': \(savedValue)")
+        } else {
+            print("1No value found for 'yourKey'")
+        }
+
+        
+        if let appGroupDefaults = UserDefaults(suiteName: "my.group.example") {
+            // Save a key-value pair
+            // appGroupDefaults.set("123", forKey: "widgetStreak")
+            
+            // Read the value back
+            if let savedValue = appGroupDefaults.string(forKey: "myKey") {
+                print("Saved value for 'myKey': \(savedValue)")
+            } else {
+                print("No value found for 'myKey'")
+            }
+        } else {
+            print("Could not access UserDefaults for the app group")
+        }
+
+        
         return true
     }
 

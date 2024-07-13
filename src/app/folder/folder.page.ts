@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-folder',
@@ -13,5 +14,10 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+  }
+
+  async saveIt() {
+    await Preferences.configure({group: "my.group.example"});
+    Preferences.set({key: "myKey", value: "AAA"});
   }
 }
